@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36717.8 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtChess", "QtChess.vcxproj", "{DD9BF140-2D47-4A01-9200-65863FC6D3CA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "chess_logic", "..\chess_logic\chess_logic.vcxproj", "{35AEF910-F514-4515-A4C3-A40E69A767AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -15,6 +17,10 @@ Global
 		{DD9BF140-2D47-4A01-9200-65863FC6D3CA}.Debug|x64.Build.0 = Debug|x64
 		{DD9BF140-2D47-4A01-9200-65863FC6D3CA}.Release|x64.ActiveCfg = Release|x64
 		{DD9BF140-2D47-4A01-9200-65863FC6D3CA}.Release|x64.Build.0 = Release|x64
+		{35AEF910-F514-4515-A4C3-A40E69A767AE}.Debug|x64.ActiveCfg = Debug|x64
+		{35AEF910-F514-4515-A4C3-A40E69A767AE}.Debug|x64.Build.0 = Debug|x64
+		{35AEF910-F514-4515-A4C3-A40E69A767AE}.Release|x64.ActiveCfg = Release|x64
+		{35AEF910-F514-4515-A4C3-A40E69A767AE}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
