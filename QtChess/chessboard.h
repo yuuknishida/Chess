@@ -3,27 +3,16 @@
 #define CHESSBOARD_H
 
 #include <QWidget>
-#include "./c"
+#include <QVector>
+#include <string>
+#include <ostream>
+#include <iostream>
+#include "../chess_logic/Board.h"
 #include "ui_chessboard.h"
 
 // Chessboard class definition
 // Inherits from QWidget Manages the chessboard UI
 // and handles resize events using the generated UI class from ui_chessboard.h
-
-// functions:
-// - Chessboard(QWidget *parent = nullptr): Constructor that initializes the chessboard UI.
-// - ~Chessboard(): Destructor for the chessboard class.
-// - void resizeEvent(QResizeEvent* event) override: Handles resize events for the chessboard.
-// - void setPiecePixmap(const QString& position, const QPixmap& pixmap): Sets the pixmap for a specific chess piece on the board.
-// - QPixmap getPiecePixmap(const QString& position) const: Retrieves the pixmap of a specific chess piece on the board.
-// members:
-
-enum Piece {
-	WP, WR, WN, WB, WQ, WK,
-	BP, BR, BN, BB, BQ, BK,
-	PIECE_COUNT,
-	NO_PIECE = -1
-};
 
 class Chessboard : public QWidget
 {
@@ -34,14 +23,44 @@ public:
 	~Chessboard();
 
 	void setPixmap();
+	void setDebugBorders(bool enabled);
+	bool debugBorders() const;
+
+	void setPieceSelected(bool selected, int squareIndex = -1);
+
+	void pieceSelected(int squareIndex);	// emit when a piece becomes selected. squareindex is the index of the selected square
+	void pieceSelectionCleared();	// emit when piece selection is cleared
+	void moveSelected(int toSquareIndex); // emit when a move is selected. toSquareIndex is the index of the target square
 
 protected:
 	void resizeEvent(QResizeEvent* event) override;
+	QSize sizeHint() const override;
+
+	bool hasHeightForWidth() const override { return true; }
+	int heightForWidth(int w) const override;
+
+private slots:
+	void onButtonClicked(QPushButton& button);
 
 private:
-	Ui::ChessboardClass ui;
+	Ui::Chessboard ui;
 
 	QIcon piecePixmaps[PIECE_COUNT];
+	QVector<QPushButton*> squares;
+	QPushButton* chosenSquare = nullptr;
+
+	int getSquareIndexFromButton(const QPushButton& button) const;
+
+	Board board;
+	
+	int m_maxBoardSize = 800;
+
+	bool m_debugBorders = false;
+	bool isPieceSelected = false;
+
+	void adjustSquareSizes();
+
+	void setHighlightedSquares(int sqIndex, bool selected);
 };
 
 #endif

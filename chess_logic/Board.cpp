@@ -69,6 +69,29 @@ inline bool Board::hasPiece(Piece p, int bit) const
 	return (bitmaps[p] & (1ull << bit));
 }
 
+bool Board::movePiece(Piece piece, int fromSq, int toSq)
+{
+	// conditions to check:
+	// - piece exists at fromSq
+	// - piece does not exist at toSq
+	// - fromSq and toSq are different
+	// If all conditions met, move piece and return true
+
+	if (fromSq == toSq) return false;
+	if (!hasPiece(piece, fromSq)) return false;
+
+	// clear any piece at toSq
+	for (int i = 0; i < PIECE_COUNT; i++) {
+		if (hasPiece(static_cast<Piece>(i), toSq)) {
+			clearPiece(static_cast<Piece>(i), toSq);
+		}
+	}
+
+	// move piece
+	clearPiece(piece, fromSq);
+	setPiece(piece, toSq);
+}
+
 Piece Board::getPieceAt(int sq) const
 {
 	for (int i = 0; i < PIECE_COUNT; i++) {

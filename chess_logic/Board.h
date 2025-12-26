@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <iostream>
 #include <string>
+#include <vector>
 #ifndef BOARD_H
 #define BOARD_H
 
@@ -40,10 +41,16 @@ public:
 	void setPiece(Piece piece, unsigned int bit);
 
 	bool hasPiece(Piece p, int bit) const;  
+	bool movePiece(Piece piece, int fromSq, int toSq);
 
 	Piece getPieceAt(int sq) const;
 
 	uint64_t bitmaps[PIECE_COUNT];
+
+	std::vector<int> allMoveOptions;
+	uint64_t selectedPosition = 0x0000000000000000;
+
+	Piece selectedPiece = NO_PIECE;
 };
 
 #endif // BOARD_H
